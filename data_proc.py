@@ -2,9 +2,10 @@ import pandas as pd
 import os
 import glob
 import numpy as np
+from pandas.io.parsers import read_csv
 
 
-def read_csv_data():
+def read_csv_data() -> "pd.DataFrame":
     files = glob.glob(os.path.join(os.getcwd(), "data\\bet\\*.csv"))
     dfs = []
     for file in files:
@@ -31,7 +32,7 @@ class SeasonSummary:
     def __repr__(self):
         return f"SeasonSummary(data = {self.data}, season = {self.season})"
 
-    def get_result_matrix(self):
+    def get_result_matrix(self) -> "pd.DataFrame":
         """get the result matrict for a single season"""
         teams = self.data["HomeTeam"].unique().tolist()
         teams.sort()
@@ -54,7 +55,7 @@ class SeasonSummary:
 
         return pd.DataFrame.from_records(results)
 
-    def summary_goals(self):
+    def summary_goals(self) -> "pd.DataFrame":
         """get the summary of goals for a single season"""
         # num_of_matches = len(df.index)
 
@@ -96,7 +97,7 @@ class SeasonSummary:
 
         return result
 
-    def summary_ft_results(self):
+    def summary_ft_results(self) -> "pd.DataFrame":
         """get the summary of the full time results and their odds"""
         df_idx = ["home_win", "draw", "away_win"]
         match_cnt = np.array(
@@ -154,7 +155,7 @@ class SeasonSummary:
         )
         return results
 
-    def summary_goal_spread(self):
+    def summary_goal_spread(self) -> "pd.DataFrame":
         """get the spread of goals in a match"""
         # num_of_matches = len(df.index)
 
@@ -184,7 +185,7 @@ class SeasonSummary:
         return_df.reset_index(inplace=True)
         return return_df
 
-    def summary_goal_markets(self):
+    def summary_goal_markets(self) -> "pd.DataFrame":
         """get the goal markets"""
         # num_of_matches = len(df.index)
         df_cols = ["match_cnt", "match_pct", "fair_odds"]
@@ -208,7 +209,7 @@ class SeasonSummary:
         return_df = pd.DataFrame.from_dict(results, orient="index", columns=df_cols)
         return return_df
 
-    def summary_stats(self):
+    def summary_stats(self) -> "pd.DataFrame":
         """get the stats of corners, shots, cards and fouls"""
 
         df_cols = [
@@ -409,7 +410,7 @@ class SeasonSummary:
         return_df.reset_index(inplace=True)
         return return_df
 
-    def calc_main_tables(self, table_type="overall"):
+    def calc_main_tables(self, table_type: str = "overall") -> "pd.DataFrame":
         """calculate the ranking table"""
         df = self.data
 
@@ -688,7 +689,7 @@ class SeasonSummary:
         else:
             return 0
 
-    def calc_team_stats(self, team):
+    def calc_team_stats(self, team: str) -> "pd.DataFrame":
         overall_main_tables = self.calc_main_tables("overall")
         home_main_tables = self.calc_main_tables("home")
         away_main_tables = self.calc_main_tables("away")

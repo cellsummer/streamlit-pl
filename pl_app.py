@@ -24,12 +24,28 @@ main_menu = [
     # "News",
 ]
 season_menu = all_df["season"].unique().tolist()
-home_menu = ["Liverpool", "Arsenal", "Chelsea", "Man United", "Man City", "Tottenham"]
-away_menu = ["Liverpool", "Arsenal", "Chelsea", "Man United", "Man City", "Tottenham"]
+home_menu = [
+    "Liverpool",
+    "Arsenal",
+    "Chelsea",
+    "Man United",
+    "Man City",
+    "Tottenham",
+]
+away_menu = [
+    "Liverpool",
+    "Arsenal",
+    "Chelsea",
+    "Man United",
+    "Man City",
+    "Tottenham",
+]
 st.sidebar.image("Barclays_PL.png")
 st.sidebar.write("# Premier League Analytics and Dashboard")
 st.sidebar.write(
-    "ExploreExplore historical results for the Premier League season and see the analytics and betting odds for your favourite team. "
+    """
+    ExploreExplore historical results for the Premier League season and see the analytics and betting odds for your favourite team. 
+    """
 )
 page = st.sidebar.selectbox("Page", main_menu)
 season = st.sidebar.selectbox(
